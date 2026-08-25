@@ -235,21 +235,32 @@
 
   /* ---------- collage ---------- */
   .collage{
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
     gap: 16px;
     margin-top: 18px;
   }
-  .collage{ overflow: hidden; }
-  .collage .polaroid{ width: 100%; min-width: 0; overflow: hidden; }
+  .collage .polaroid{
+    flex: 1 1 calc(50% - 8px);
+    width: auto;
+    min-width: 0;
+    max-width: calc(50% - 8px);
+    overflow: hidden;
+    box-sizing: border-box;
+  }
   .collage .polaroid img{ min-width: 0; max-width: 100%; }
   .collage .polaroid:nth-child(1){ transform: rotate(-3deg); }
   .collage .polaroid:nth-child(2){ transform: rotate(2.5deg); }
   .collage .polaroid:nth-child(3){ transform: rotate(2deg); }
   .collage .polaroid:nth-child(4){ transform: rotate(-2.5deg); }
-  .collage-3{ grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-  .collage-3 .polaroid{ padding: 6px 6px 16px; }
-  .collage-3 .polaroid figcaption{ font-size: 0.85rem; }
+  .collage-3{ gap: 8px; flex-wrap: nowrap; }
+  .collage-3 .polaroid{
+    flex: 1 1 0;
+    max-width: calc(33.333% - 6px);
+    padding: 6px 6px 16px;
+  }
+  .collage-3 .polaroid figcaption{ font-size: 0.78rem; }
   .collage-3.collage .polaroid:nth-child(1),
   .collage-3.collage .polaroid:nth-child(2),
   .collage-3.collage .polaroid:nth-child(3){ transform: none; }
@@ -275,9 +286,10 @@
   }
   .counter-grid{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 12px;
   }
+  .counter-unit{ min-width: 0; overflow: hidden; }
   .counter-unit{
     background: var(--bg);
     border: 2px solid var(--line);
@@ -361,14 +373,14 @@
     0%, 100%{ transform: rotate(3deg) translateY(0); }
     50%{ transform: rotate(3deg) translateY(-6px); }
   }
+</head>
+<body>
   .hero-duo .polaroid:nth-child(1){ animation: floatY1 4.5s ease-in-out infinite; }
   .hero-duo .polaroid:nth-child(2){ animation: floatY2 4.5s ease-in-out infinite .4s; }
   .counter-big{ transition: transform .2s ease; }
   .counter-unit{ transition: transform .2s ease; }
   .counter-unit:hover{ transform: translateY(-3px); }
 </style>
-</head>
-<body>
 
 <div class="bg-pattern"></div>
 
