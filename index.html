@@ -376,8 +376,6 @@
     50%{ transform: rotate(-4deg) translateY(-6px); }
   }
   @keyframes floatY2{
-</head>
-<body>
     0%, 100%{ transform: rotate(3deg) translateY(0); }
     50%{ transform: rotate(3deg) translateY(-6px); }
   }
@@ -386,7 +384,116 @@
   .counter-big{ transition: transform .2s ease; }
   .counter-unit{ transition: transform .2s ease; }
   .counter-unit:hover{ transform: translateY(-3px); }
+
+  /* ---------- envelope intro ---------- */
+  body.env-locked{ overflow: hidden; height: 100vh; }
+  #envelope-screen{
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    background: var(--bg);
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    font: inherit;
+    transition: opacity .55s ease;
+  }
+  #envelope-screen .env-caption{
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-size: 1.1rem;
+    letter-spacing: .02em;
+  }
+  .env-wrap{
+    position: relative;
+    width: 220px;
+    height: 150px;
+    perspective: 900px;
+  }
+  .env-wrap svg{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .env-flap{
+    transform-origin: 50% 0%;
+    transition: transform .8s cubic-bezier(.6,0,.4,1);
+    backface-visibility: hidden;
+  }
+  .env-seal{ transition: opacity .3s ease; }
+  .env-hint{
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    color: var(--ink-soft);
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    font-size: .78rem;
+    animation: envPulse 1.8s ease-in-out infinite;
+  }
+  @keyframes envPulse{ 0%,100%{ opacity:.5; } 50%{ opacity:1; } }
+  #envelope-screen.opening .env-flap{ transform: rotateX(-150deg); }
+  #envelope-screen.opening .env-seal{ opacity: 0; }
+  #envelope-screen.opening .env-wrap{ animation: envLift .55s ease .4s forwards; }
+  #envelope-screen.opening .env-hint,
+  #envelope-screen.opening .env-caption{ animation: envFadeOut .4s ease forwards; }
+  @keyframes envLift{ to{ transform: translateY(-18px) scale(1.06); opacity: 0; } }
+  @keyframes envFadeOut{ to{ opacity: 0; } }
+  #envelope-screen.hide{ opacity: 0; pointer-events: none; }
+  @media (prefers-reduced-motion: reduce){
+    #envelope-screen{ display: none; }
+  }
 </style>
+
+<button type="button" id="envelope-screen" aria-label="Tocar para abrir la carta">
+</head>
+<body>
+  <div class="env-caption">para mi ale</div>
+  <div class="env-wrap">
+    <svg class="env-back" viewBox="0 0 220 150" aria-hidden="true">
+      <rect x="4" y="4" width="212" height="142" rx="10" fill="var(--surface)" stroke="var(--line)" stroke-width="3"/>
+      <path d="M8 138 L92 78 L128 78 L212 138" fill="none" stroke="var(--line)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <svg class="env-flap" viewBox="0 0 220 150" aria-hidden="true">
+      <path d="M4 14 Q4 4 14 4 L206 4 Q216 4 216 14 L110 92 Z" fill="var(--accent-2)" stroke="var(--line)" stroke-width="3" stroke-linejoin="round"/>
+      <g class="env-seal">
+        <circle cx="110" cy="46" r="20" fill="var(--accent)" stroke="var(--line)" stroke-width="2.5"/>
+        <path d="M110 55c-8-7-16-13-16-21a9 9 0 0 1 16-5.5A9 9 0 0 1 126 34c0 8-8 14-16 21Z" fill="var(--surface)"/>
+      </g>
+    </svg>
+  </div>
+  <div class="env-hint">tócame</div>
+</button>
+<script>
+  (function(){
+    var screen = document.getElementById('envelope-screen');
+    if(!screen) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      screen.remove();
+      return;
+    }
+    document.body.classList.add('env-locked');
+    function openEnvelope(){
+      if (screen.classList.contains('opening')) return;
+      screen.classList.add('opening');
+      setTimeout(function(){
+        screen.classList.add('hide');
+        document.body.classList.remove('env-locked');
+      }, 850);
+      setTimeout(function(){
+        if (screen.parentNode) screen.parentNode.removeChild(screen);
+      }, 1450);
+    }
+    screen.addEventListener('click', openEnvelope);
+  })();
+</script>
 
 <div class="bg-pattern"></div>
 
