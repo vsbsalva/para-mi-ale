@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Gracias por quedarte">
+<title>gracias por quedarte 🤎</title>
+<meta property="og:title" content="gracias por quedarte 🤎">
+<meta property="og:description" content="una cartita para ti">
+<meta name="twitter:title" content="gracias por quedarte 🤎">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Quicksand:wght@400;500;600;700&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg: #FAF6F3;
+    --surface: #FFFFFF;
+    --ink: #1C1512;
+    --ink-soft: #7A6E68;
+    --accent: #E2314F;
+    --accent-2: #FFC7D9;
+    --line: #1C1512;
+    --shadow: 0 10px 0 0 var(--ink);
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #1A1114;
+      --surface: #241A1E;
+      --ink: #F7ECEE;
+      --ink-soft: #B99DA5;
+      --accent: #FF7A9C;
+      --accent-2: #5C2836;
+      --line: #F7ECEE;
+      --shadow: 0 10px 0 0 var(--line);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #1A1114;
+    --surface: #241A1E;
+    --ink: #F7ECEE;
+    --ink-soft: #B99DA5;
+    --accent: #FF7A9C;
+    --accent-2: #5C2836;
+    --line: #F7ECEE;
+    --shadow: 0 10px 0 0 var(--line);
+  }
+
+  *{ box-sizing: border-box; }
+
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Quicksand', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .bg-pattern{
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      radial-gradient(circle at 10% 15%, var(--accent-2) 0, transparent 2.4%),
+      radial-gradient(circle at 85% 25%, var(--accent-2) 0, transparent 2.4%),
+      radial-gradient(circle at 30% 70%, var(--accent-2) 0, transparent 2.4%),
+      radial-gradient(circle at 92% 80%, var(--accent-2) 0, transparent 2.4%),
+      radial-gradient(circle at 55% 45%, var(--accent-2) 0, transparent 2.4%);
+    background-size: 900px 900px;
+    opacity: .5;
+  }
+
+  a{ color: inherit; }
+
+  .wrap{
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 18px 100px;
+  }
+
+  /* ---------- nav ---------- */
+  nav{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+    background: color-mix(in srgb, var(--bg) 80%, transparent);
+    border-bottom: 3px solid var(--line);
+  }
+  .nav-inner{
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 12px 18px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar{ display:none; }
+  .chip{
+    flex: none;
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 0.78rem;
+    color: var(--ink);
+    text-decoration: none;
+    background: var(--surface);
+    border: 2px solid var(--line);
+    border-radius: 999px;
+    padding: 6px 14px;
+    white-space: nowrap;
+    transition: color .15s ease, background .15s ease, transform .15s ease;
+  }
+  .chip:hover{ color: var(--accent); transform: translateY(-1px); }
+
+  /* ---------- slide numbering ---------- */
+  .slide{
+    position: relative;
+    background: var(--surface);
+    border: 3px solid var(--line);
+    border-radius: 22px;
+    padding: 36px 30px;
+    margin-top: 26px;
+    box-shadow: var(--shadow);
+    scroll-margin-top: 74px;
+    overflow: hidden;
+  }
+  .pageno{
+    position: absolute;
+    top: 16px;
+    left: 18px;
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 0.72rem;
+    background: var(--ink);
+    color: var(--bg);
+    border-radius: 999px;
+    padding: 3px 11px;
+    letter-spacing: .02em;
+  }
+  .doodle{
+    position: absolute;
+    opacity: .35;
+    pointer-events: none;
+  }
+  .doodle.tl{ top: 8px; left: -6px; width: 70px; transform: rotate(-8deg); }
+  .doodle.br{ bottom: 4px; right: -10px; width: 90px; transform: rotate(12deg) scaleX(-1); }
+
+  .eyebrow{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 20px 0 8px;
+  }
+  .eyebrow svg{ width: 18px; height: 18px; flex: none; }
+
+  h1, h2{
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.05;
+    color: var(--ink);
+    text-wrap: balance;
+    margin: 0 0 16px;
+  }
+  h1{ font-size: clamp(2.2rem, 7vw, 3.1rem); }
+  h2{ font-size: clamp(1.5rem, 5vw, 2.05rem); }
+  h2 .hl{ color: var(--accent); }
+
+  p{
+    font-size: 1.02rem;
+    line-height: 1.75;
+    max-width: 60ch;
+    margin: 0 0 14px;
+    position: relative;
+  }
+  p:last-child{ margin-bottom: 0; }
+  strong{ color: var(--accent); font-weight: 700; }
+
+  .row{
+    display: flex;
+    gap: 22px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .row .text{ flex: 1 1 260px; }
+  .row .photo{ flex: 0 0 auto; }
+
+  /* ---------- polaroid ---------- */
+  .polaroid{
+    background: var(--surface);
+    border: 2px solid var(--line);
+    padding: 8px 8px 22px;
+    border-radius: 3px;
+    box-shadow: 6px 6px 0 0 var(--line);
+    width: 160px;
+  }
+  .polaroid img{
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 1px;
+    display: block;
+  }
+  .polaroid{ transition: box-shadow .2s ease; }
+  .polaroid:hover{ box-shadow: 9px 9px 0 0 var(--line); }
+  .polaroid figcaption{
+    font-family: 'Caveat', cursive;
+    font-weight: 600;
+    font-size: 1.05rem;
+    text-align: center;
+    color: var(--ink-soft);
+    margin-top: 8px;
+  }
+  .polaroid.tilt-l{ transform: rotate(-4deg); }
+  .polaroid.tilt-r{ transform: rotate(3deg); }
+
+  .hero-duo{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin-top: 22px;
+  }
+  .hero-duo .polaroid{ width: 150px; }
+  .hero-duo .polaroid:nth-child(1){ transform: rotate(-4deg); }
+  .hero-duo .polaroid:nth-child(2){ transform: rotate(3deg); }
+  .hero-polaroid figcaption{ font-size: 1.2rem; }
+
+  /* ---------- collage ---------- */
+  .collage{
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    gap: 16px;
+    margin-top: 18px;
+  }
+  .collage .polaroid{
+    flex: 1 1 calc(50% - 8px);
+    width: auto;
+    min-width: 0;
+    max-width: calc(50% - 8px);
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  .collage .polaroid img{ min-width: 0; max-width: 100%; }
+  .collage .polaroid:nth-child(1){ transform: rotate(-3deg); }
+  .collage .polaroid:nth-child(2){ transform: rotate(2.5deg); }
+  .collage .polaroid:nth-child(3){ transform: rotate(2deg); }
+  .collage .polaroid:nth-child(4){ transform: rotate(-2.5deg); }
+  .collage-3{ gap: 8px; flex-wrap: nowrap; }
+  .collage-3 .polaroid{
+    flex: 1 1 calc(33.333% - 6px);
+    max-width: calc(33.333% - 6px);
+    padding: 6px 6px 16px;
+  }
+  .collage-3 .polaroid figcaption{ font-size: 0.78rem; }
+  .collage-3.collage .polaroid:nth-child(1),
+  .collage-3.collage .polaroid:nth-child(2),
+  .collage-3.collage .polaroid:nth-child(3){ transform: none; }
+
+  /* ---------- counter ---------- */
+  .counter-card{ text-align: center; }
+  .counter-big{
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    font-size: clamp(3.2rem, 13vw, 4.8rem);
+    color: var(--accent);
+    line-height: 1;
+    margin: 10px 0 0;
+  }
+  .counter-label{
+    color: var(--ink-soft);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .counter-grid{
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .counter-unit{ min-width: 0; overflow: hidden; }
+  .counter-unit{
+    background: var(--bg);
+    border: 2px solid var(--line);
+    border-radius: 14px;
+    padding: 14px 8px;
+  }
+  .counter-unit .n{
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    font-size: 1.7rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+  }
+  .counter-unit .u{
+    font-size: 0.7rem;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    font-weight: 700;
+  }
+  .dates-row{
+    display: flex;
+    justify-content: center;
+    gap: 26px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+  .date-pill{ font-size: 0.85rem; color: var(--ink-soft); font-weight: 600; }
+  .date-pill b{ color: var(--ink); font-weight: 700; }
+
+  /* ---------- closing ---------- */
+  .closing{
+    text-align: center;
+    margin-top: 46px;
+    padding: 0 16px;
+  }
+  .closing svg{ width: 54px; margin-bottom: 10px; }
+  .closing p{ margin: 0 auto 6px; color: var(--ink-soft); }
+  .signature{
+    font-family: 'Caveat', cursive;
+    font-weight: 700;
+    font-size: 2.1rem;
+    color: var(--accent);
+    margin-top: 10px;
+  }
+  .signature-date{ font-size: 0.8rem; color: var(--ink-soft); margin-top: 4px; }
+
+  @media (max-width: 480px){
+    .slide{ padding: 30px 20px 26px; }
+    .row{ flex-direction: column; }
+    .polaroid{ width: 140px; }
+    .hero-duo .polaroid{ width: 130px; }
+    .collage-3{ flex-direction: column; align-items: center; }
+    .collage-3 .polaroid{ flex: none; width: 100%; max-width: 220px; }
+    .collage-3 .polaroid figcaption{ font-size: 1rem; }
+  }
+
+  /* ---------- motion ---------- */
+  html{ scroll-behavior: smooth; }
+  .slide, .closing{
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .slide.in-view, .closing.in-view{
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    .slide, .closing{ opacity: 1; transform: none; transition: none; }
+    .hero-duo .polaroid{ animation: none !important; }
+  }
+  .chip.active{
+    background: var(--accent);
+    color: var(--surface);
+    border-color: var(--accent);
+  }
+  @keyframes floatY1{
+    0%, 100%{ transform: rotate(-4deg) translateY(0); }
+    50%{ transform: rotate(-4deg) translateY(-6px); }
+  }
+  @keyframes floatY2{
+    0%, 100%{ transform: rotate(3deg) translateY(0); }
+    50%{ transform: rotate(3deg) translateY(-6px); }
+  }
+  .hero-duo .polaroid:nth-child(1){ animation: floatY1 4.5s ease-in-out infinite; }
+  .hero-duo .polaroid:nth-child(2){ animation: floatY2 4.5s ease-in-out infinite .4s; }
+  .counter-big{ transition: transform .2s ease; }
+  .counter-unit{ transition: transform .2s ease; }
+  .counter-unit:hover{ transform: translateY(-3px); }
+
+  /* ---------- envelope intro ---------- */
+  body.env-locked{ overflow: hidden; height: 100vh; }
+  #envelope-screen{
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    background: var(--bg);
+    cursor: pointer;
+    border: none;
+    padding: 0;
+    font: inherit;
+    transition: opacity .55s ease;
+  }
+  .env-bow{
+    width: 46px;
+    filter: drop-shadow(0 2px 0 rgba(0,0,0,.08));
+  }
+  #envelope-screen .env-caption{
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--ink);
+    font-size: 1.3rem;
+    letter-spacing: .03em;
+    text-wrap: balance;
+  }
+  .env-stage{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .env-doodle{ position: absolute; width: 60px; opacity: .4; top: 50%; margin-top: -30px; }
+  .env-doodle-l{ left: -74px; transform: rotate(-12deg) scaleX(-1); }
+  .env-doodle-r{ right: -74px; transform: rotate(8deg); }
+  .env-wrap{
+    position: relative;
+    width: 220px;
+    height: 150px;
+    perspective: 900px;
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  #envelope-screen:hover .env-wrap{ transform: translate(-2px,-2px); box-shadow: 8px 12px 0 0 var(--line); }
+  .env-wrap svg{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+  .env-flap{
+    transform-origin: 50% 0%;
+    transition: transform .8s cubic-bezier(.6,0,.4,1);
+    backface-visibility: hidden;
+  }
+  .env-seal{ transition: opacity .3s ease; }
+  .env-shadow-dot{
+    width: 170px;
+    height: 20px;
+    margin: 10px auto 0;
+    background: radial-gradient(ellipse at center, var(--ink) 0%, transparent 72%);
+    opacity: .14;
+    border-radius: 50%;
+  }
+  .env-hint{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    color: var(--ink-soft);
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    font-size: .8rem;
+    animation: envPulse 1.8s ease-in-out infinite;
+  }
+  .env-hint svg{ width: 15px; height: 15px; }
+  @keyframes envPulse{ 0%,100%{ opacity:.5; transform: translateY(0); } 50%{ opacity:1; transform: translateY(-2px); } }
+  #envelope-screen.opening .env-bow{ animation: envFadeOut .35s ease forwards; }
+  #envelope-screen.opening .env-flap{ transform: rotateX(-150deg); }
+  #envelope-screen.opening .env-seal{ opacity: 0; }
+  #envelope-screen.opening .env-wrap{ box-shadow: none; animation: envLift .55s ease .4s forwards; }
+  #envelope-screen.opening .env-shadow-dot{ animation: envFadeOut .4s ease forwards; }
+  #envelope-screen.opening .env-hint,
+  #envelope-screen.opening .env-caption{ animation: envFadeOut .4s ease forwards; }
+  @keyframes envLift{ to{ transform: translateY(-18px) scale(1.06); opacity: 0; } }
+  @keyframes envFadeOut{ to{ opacity: 0; } }
+  #envelope-screen.hide{ opacity: 0; pointer-events: none; }
+  @media (max-width: 480px){
+    .env-doodle{ display: none; }
+    .env-wrap{ width: 190px; height: 130px; }
+    #envelope-screen .env-caption{ font-size: 1.1rem; }
+  }
+  @media (prefers-reduced-motion: reduce){
+    #envelope-screen{ display: none; }
+  }
+</style>
+</head>
+<body>
+
+<button type="button" id="envelope-screen" aria-label="Tocar para abrir la carta">
+  <svg class="env-bow" viewBox="0 0 64 40" aria-hidden="true">
+    <path d="M30 20C30 20 20 6 8 8C-2 10 2 30 14 28C24 26 30 20 30 20Z" fill="var(--accent)"/>
+    <path d="M34 20C34 20 44 6 56 8C66 10 62 30 50 28C40 26 34 20 34 20Z" fill="var(--accent)"/>
+    <circle cx="32" cy="20" r="6" fill="var(--accent)"/>
+    <circle cx="32" cy="20" r="2.4" fill="var(--surface)"/>
+  </svg>
+  <div class="env-caption">gracias por quedarte</div>
+  <div class="env-stage">
+    <svg class="env-doodle env-doodle-l" viewBox="0 0 100 60" fill="none" aria-hidden="true"><path d="M4 40C10 20 20 50 28 30C36 10 46 45 54 25C62 8 72 38 80 22" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/></svg>
+    <svg class="env-doodle env-doodle-r" viewBox="0 0 100 60" fill="none" aria-hidden="true"><path d="M4 40C10 20 20 50 28 30C36 10 46 45 54 25C62 8 72 38 80 22" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/></svg>
+    <div class="env-wrap">
+      <svg class="env-back" viewBox="0 0 220 150" aria-hidden="true">
+        <rect x="3" y="3" width="214" height="144" rx="12" fill="var(--surface)" stroke="var(--line)" stroke-width="3.5"/>
+        <rect x="150" y="16" width="40" height="30" rx="3" fill="none" stroke="var(--ink-soft)" stroke-width="1.6" stroke-dasharray="2.4 2.4" opacity=".55"/>
+        <path d="M162 39c-4-3.5-8-6.5-8-10.5a4.5 4.5 0 0 1 8-2.8 4.5 4.5 0 0 1 8 2.8c0 4-4 7-8 10.5Z" fill="var(--accent-2)" opacity=".8"/>
+        <path d="M8 140 L92 80 L128 80 L212 140" fill="none" stroke="var(--line)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <svg class="env-flap" viewBox="0 0 220 150" aria-hidden="true">
+        <path d="M3 15 Q3 3 15 3 L205 3 Q217 3 217 15 L110 92 Z" fill="var(--accent-2)" stroke="var(--line)" stroke-width="3.5" stroke-linejoin="round"/>
+        <g class="env-seal">
+          <circle cx="110" cy="46" r="22" fill="var(--accent)" stroke="var(--line)" stroke-width="3"/>
+          <circle cx="110" cy="46" r="22" fill="none" stroke="var(--surface)" stroke-width="1" opacity=".5"/>
+          <path d="M110 58c-9-7.5-18-14.5-18-23.5a10 10 0 0 1 18-6.2 10 10 0 0 1 18 6.2c0 9-9 16-18 23.5Z" fill="var(--surface)"/>
+        </g>
+      </svg>
+    </div>
+    <p class="env-shadow-dot"></p>
+  </div>
+  <div class="env-hint">
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s-8-4.6-8-11a5 5 0 0 1 8-4 5 5 0 0 1 8 4c0 6.4-8 11-8 11Z" fill="var(--ink-soft)"/></svg>
+    tócame
+  </div>
+</button>
+<script>
+  (function(){
+    var screen = document.getElementById('envelope-screen');
+    if(!screen) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      screen.remove();
+      return;
+    }
+    document.body.classList.add('env-locked');
+    function openEnvelope(){
+      if (screen.classList.contains('opening')) return;
+      screen.classList.add('opening');
+      setTimeout(function(){
+        screen.classList.add('hide');
+        document.body.classList.remove('env-locked');
+      }, 850);
+      setTimeout(function(){
+        if (screen.parentNode) screen.parentNode.removeChild(screen);
+      }, 1450);
+    }
+    screen.addEventListener('click', openEnvelope);
+  })();
+</script>
+<div class="bg-pattern"></div>
+
+<div class="wrap">
+
+  <header class="slide" id="portada">
+    <svg class="doodle tl" viewBox="0 0 100 60" fill="none"><path d="M4 40C10 20 20 50 28 30C36 10 46 45 54 25C62 8 72 38 80 22" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/></svg>
+    <svg class="doodle br" viewBox="0 0 100 60" fill="none"><path d="M4 40C10 20 20 50 28 30C36 10 46 45 54 25C62 8 72 38 80 22" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/></svg>
+    <div style="text-align:center; padding-top:14px;">
+      <h1>Gracias por<br>quedarte</h1>
+      <p style="max-width:46ch; margin:0 auto;">Esta te la escribo distinta a las demás. Sin adornos, sin fechas, solo lo que de verdad siento. 🤎</p>
+    </div>
+  </header>
+
+  <section class="slide" id="vacio">
+    <svg class="doodle br" viewBox="0 0 100 60" fill="none"><path d="M4 40C10 20 20 50 28 30C36 10 46 45 54 25C62 8 72 38 80 22" stroke="var(--ink-soft)" stroke-width="3" stroke-linecap="round"/></svg>
+    <p class="eyebrow">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-8-4.6-8-11a5 5 0 0 1 8-4 5 5 0 0 1 8 4c0 6.4-8 11-8 11Z" fill="var(--accent)"/></svg>
+      lo que casi nunca digo
+    </p>
+    <h2>Lo vacío que<br>me <span class="hl">sentí</span></h2>
+    <p>Durante mucho tiempo sentí un vacío que ni yo mismo sabía explicar bien. No era algo que pasara un día y se me pasara al siguiente, era algo que cargaba todo el tiempo, como de fondo, aunque afuera todo pareciera normal.</p>
+    <p>Aprendí a sonreír igual, a seguir el día como si nada, aunque por dentro sintiera que me faltaba algo que no sabía nombrar. Nadie lo notaba, y yo tampoco hacía mucho por que lo notaran.</p>
+    <p>Llegué a pensar que esa iba a ser mi vida siempre. Que ese vacío era simplemente parte de mí y ya, que tocaba acostumbrarse y seguir.</p>
+    <p>Creo que parte de eso viene de mucho antes, de cuando era un niño y quería soltar todo mi amor sin que nadie me lo pidiera, y lo único que encontraba era que me ignoraban. Uno aprende rápido a guardarse las ganas de querer cuando siente que nadie las recibe.</p>
+  </section>
+
+  <section class="slide" id="lo-que-pase">
+    <svg class="doodle tl" viewBox="0 0 100 60" fill="none"><path d="M4 40C10 20 20 50 28 30C36 10 46 45 54 25C62 8 72 38 80 22" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/></svg>
+    <p class="eyebrow">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="var(--accent)" stroke-width="2"/><path d="M12 7v5l3 3" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/></svg>
+      antes de ti
+    </p>
+    <h2>Todo lo que tuve<br>que <span class="hl">pasar</span></h2>
+    <p>Tuve que aprender solo a salir adelante en muchas cosas. Nadie me enseñó cómo se sale de un momento así, lo fui entendiendo a los golpes, cayéndome y levantándome sin que casi nadie se enterara.</p>
+    <p>Hubo días que de verdad no tenía ganas ni de levantarme, y aun así lo hacía, porque no quedaba de otra. Me acostumbré a resolver todo por mi cuenta, a no depender de nadie, porque depender dolía más cuando la gente no se quedaba.</p>
+    <p>Con el tiempo me volví bueno para ocultar cómo estaba. Podía estar mal y que nadie lo notara. Y así seguí, hasta que apareciste tú.</p>
+  </section>
+
+  <section class="slide" id="llegaste">
+    <svg class="doodle br" viewBox="0 0 100 60" fill="none"><path d="M4 40C10 20 20 50 28 30C36 10 46 45 54 25C62 8 72 38 80 22" stroke="var(--ink-soft)" stroke-width="3" stroke-linecap="round"/></svg>
+    <p class="eyebrow">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M4 5h16v11H8l-4 4V5Z" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/></svg>
+      y entonces llegaste tú
+    </p>
+    <h2>Todo empezó<br>a tener <span class="hl">sentido</span></h2>
+    <p>No fue que llegaras y arreglaras todo de un día para otro, eso no existe. Fue que, por primera vez en mucho tiempo, sentí que no estaba cargando esto solo.</p>
+    <p>Empecé a sentir cosas que ya ni pensaba que iba a volver a sentir. Ganas de contar cómo me fue el día, ganas de que llegara la noche para hablar contigo, ganas reales de que las cosas me salieran bien.</p>
+    <p>Y lo más raro es que no hiciste nada extraordinario. Solo te quedaste. Y resulta que eso era justo lo que me hacía falta.</p>
+    <p>Contigo siento que vuelvo a ser ese niño que quería dar todo su amor y no podía. Solo que ahora sí puedo, porque tú sí lo recibes, y eso para mí lo cambia todo.</p>
+  </section>
+
+  <section class="slide" id="gracias-a-ti">
+    <svg class="doodle tl" viewBox="0 0 100 60" fill="none"><path d="M4 40C10 20 20 50 28 30C36 10 46 45 54 25C62 8 72 38 80 22" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/></svg>
+    <p class="eyebrow">
+      <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="9" r="5" stroke="var(--accent)" stroke-width="2"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/></svg>
+      hoy en día
+    </p>
+    <h2>Gracias a <span class="hl">ti</span></h2>
+    <p>Hoy en día todo mejoró, y no tengo dudas de que gran parte es gracias a ti. No sé en qué momento pasaste de ser alguien que conocí en un parque a ser la persona sin la que ya no me imagino el día a día.</p>
+    <p>Te amo demasiado, mi amor. Mucho más de lo que te lo digo, porque a veces las palabras se quedan cortas para lo que siento cuando pienso en ti.</p>
+    <p>Eres mi razón para seguir, hoy en día de verdad no sé qué haría sin ti. Y no lo digo para que suene bonito, lo digo porque es lo que siento, tal cual, sin adornarlo.</p>
+  </section>
+
+  <div class="closing" id="cierre">
+    <svg viewBox="0 0 64 40" fill="none" aria-hidden="true" style="margin:0 auto 14px; display:block;">
+      <path d="M30 20C30 20 20 6 8 8C-2 10 2 30 14 28C24 26 30 20 30 20Z" fill="var(--accent)"/>
+      <path d="M34 20C34 20 44 6 56 8C66 10 62 30 50 28C40 26 34 20 34 20Z" fill="var(--accent)"/>
+      <circle cx="32" cy="20" r="6" fill="var(--accent)"/>
+      <circle cx="32" cy="20" r="2.4" fill="var(--surface)"/>
+    </svg>
+    <p>Esto es lo más real que te he escrito hasta ahora.</p>
+    <p>Gracias por quedarte, por elegirme incluso en mis días grises, y por ser hoy la razón por la que quiero seguir para adelante.</p>
+    <div class="signature">Kamilito 🤎</div>
+  </div>
+
+</div>
+
+<script>
+  (function(){
+    var revealTargets = document.querySelectorAll('.slide, .closing');
+    if ('IntersectionObserver' in window) {
+      var revealIO = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            revealIO.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      revealTargets.forEach(function(el){ revealIO.observe(el); });
+    } else {
+      revealTargets.forEach(function(el){ el.classList.add('in-view'); });
+    }
+  })();
+</script>
+</body>
+</html>
