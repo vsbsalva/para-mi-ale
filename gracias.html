@@ -170,47 +170,58 @@
     gap: 20px; background: var(--bg); cursor: pointer; border: none; padding: 0; font: inherit;
     transition: opacity .55s ease;
   }
-  #envelope-screen .env-caption{
-    font-family: 'Fraunces', Georgia, serif;
-    font-weight: 600; font-style: italic;
-    color: var(--ink); font-size: 1.3rem;
+  .env-kicker{
+    font-family: 'Lora', Georgia, serif;
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: .95rem;
+    margin: 0;
   }
-  .env-stage{ position: relative; display: flex; flex-direction: column; align-items: center; }
-  .env-doodle{ position: absolute; width: 44px; opacity: .5; top: 50%; margin-top: -22px; }
-  .env-doodle-l{ left: -66px; }
-  .env-doodle-r{ right: -66px; }
-  .env-wrap{
-    position: relative; width: 210px; height: 145px; perspective: 900px;
-    border-radius: 8px; box-shadow: 0 22px 40px -18px rgba(30,18,10,.45);
+  .env-stage{
+    position: relative;
+    width: 170px;
+    height: 210px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  .env-wrap svg{ position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-  .env-flap{ transform-origin: 50% 0%; transition: transform .8s cubic-bezier(.6,0,.4,1); backface-visibility: hidden; }
-  .env-seal{ transition: opacity .3s ease; }
-  .env-shadow-dot{
-    width: 160px; height: 18px; margin: 10px auto 0;
-    background: radial-gradient(ellipse at center, var(--ink) 0%, transparent 72%);
-    opacity: .16; border-radius: 50%;
+  .env-paper{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 18px 30px rgba(30,18,10,.35));
+    transition: transform .6s ease, opacity .6s ease;
+  }
+  .env-seal{
+    position: absolute;
+    width: 92px;
+    height: 92px;
+    left: 50%;
+    top: 46%;
+    transform: translate(-50%,-50%);
+    filter: drop-shadow(0 6px 10px rgba(30,18,10,.3));
+    transition: transform .5s cubic-bezier(.6,0,.4,1), opacity .5s ease;
   }
   .env-hint{
-    display: flex; align-items: center; gap: 6px;
     font-family: 'Lora', Georgia, serif; font-style: italic;
     color: var(--ink-soft); font-size: .9rem;
     animation: envPulse 1.8s ease-in-out infinite;
   }
-  .env-hint svg{ width: 14px; height: 14px; }
-  @keyframes envPulse{ 0%,100%{ opacity:.5; transform: translateY(0); } 50%{ opacity:1; transform: translateY(-2px); } }
-  #envelope-screen.opening .env-flap{ transform: rotateX(-150deg); }
-  #envelope-screen.opening .env-seal{ opacity: 0; }
-  #envelope-screen.opening .env-wrap{ animation: envLift .55s ease .4s forwards; }
-  #envelope-screen.opening .env-shadow-dot,
-  #envelope-screen.opening .env-hint,
-  #envelope-screen.opening .env-caption{ animation: envFadeOut .4s ease forwards; }
-  @keyframes envLift{ to{ transform: translateY(-18px) scale(1.06); opacity: 0; } }
+  @keyframes envPulse{ 0%,100%{ opacity:.5; } 50%{ opacity:1; } }
+  #envelope-screen.opening .env-seal{
+    transform: translate(-50%,-50%) scale(1.3) rotate(35deg);
+    opacity: 0;
+  }
+  #envelope-screen.opening .env-paper{ animation: paperLift .55s ease .35s forwards; }
+  #envelope-screen.opening .env-kicker,
+  #envelope-screen.opening .env-hint{ animation: envFadeOut .4s ease forwards; }
+  @keyframes paperLift{ to{ transform: translateY(-20px) scale(1.05); opacity: 0; } }
   @keyframes envFadeOut{ to{ opacity: 0; } }
   #envelope-screen.hide{ opacity: 0; pointer-events: none; }
   @media (max-width: 480px){
-    .env-doodle{ display: none; }
-    .env-wrap{ width: 180px; height: 124px; }
+    .env-stage{ width: 150px; height: 190px; }
+    .env-seal{ width: 80px; height: 80px; }
   }
   @media (prefers-reduced-motion: reduce){
     #envelope-screen{ display: none; }
@@ -219,30 +230,25 @@
 </head>
 <body>
 
-<button type="button" id="envelope-screen" aria-label="Tocar para abrir la carta">
-  <div class="env-caption">gracias por quedarte</div>
+<button type="button" id="envelope-screen" aria-label="Tocar para romper el sello y leer la carta">
+  <p class="env-kicker">una carta cerrada para ti</p>
   <div class="env-stage">
-    <svg class="env-doodle env-doodle-l" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s-8-4.6-8-11a5 5 0 0 1 8-4 5 5 0 0 1 8 4c0 6.4-8 11-8 11Z" stroke="var(--accent)" stroke-width="1.6"/></svg>
-    <svg class="env-doodle env-doodle-r" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s-8-4.6-8-11a5 5 0 0 1 8-4 5 5 0 0 1 8 4c0 6.4-8 11-8 11Z" stroke="var(--accent)" stroke-width="1.6"/></svg>
-    <div class="env-wrap">
-      <svg class="env-back" viewBox="0 0 220 150" aria-hidden="true">
-        <rect x="3" y="3" width="214" height="144" rx="8" fill="var(--surface)" stroke="var(--line)" stroke-width="2.5"/>
-        <path d="M8 140 L92 80 L128 80 L212 140" fill="none" stroke="var(--line)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <svg class="env-flap" viewBox="0 0 220 150" aria-hidden="true">
-        <path d="M3 11 Q3 3 11 3 L209 3 Q217 3 217 11 L110 92 Z" fill="var(--accent-2)" stroke="var(--line)" stroke-width="2.5" stroke-linejoin="round"/>
-        <g class="env-seal">
-          <circle cx="110" cy="46" r="20" fill="var(--accent)" stroke="var(--line)" stroke-width="2"/>
-          <path d="M110 57c-8-6.7-16-13-16-21a9 9 0 0 1 16-5.6A9 9 0 0 1 126 36c0 8-8 14.3-16 21Z" fill="var(--surface)"/>
-        </g>
-      </svg>
-    </div>
-    <p class="env-shadow-dot"></p>
+    <svg class="env-paper" viewBox="0 0 160 200" aria-hidden="true">
+      <rect x="4" y="4" width="152" height="192" rx="4" fill="var(--surface)" stroke="var(--line-soft)" stroke-width="1.5"/>
+      <line x1="24" y1="140" x2="136" y2="140" stroke="var(--line-soft)" stroke-width="1.5"/>
+      <line x1="24" y1="156" x2="120" y2="156" stroke="var(--line-soft)" stroke-width="1.5"/>
+      <line x1="24" y1="172" x2="128" y2="172" stroke="var(--line-soft)" stroke-width="1.5"/>
+    </svg>
+    <svg class="env-seal" viewBox="0 0 120 120" aria-hidden="true">
+      <path class="env-drip" d="M60 96c-4 10-10 16-10 22a10 10 0 0 0 20 0c0-6-6-12-10-22Z" fill="var(--accent)"/>
+      <path class="env-drip" d="M32 90c-3 8-7 12-7 17a7 7 0 0 0 14 0c0-5-4-9-7-17Z" fill="var(--accent)"/>
+      <path class="env-drip" d="M88 90c-3 8-7 12-7 17a7 7 0 0 0 14 0c0-5-4-9-7-17Z" fill="var(--accent)"/>
+      <circle cx="60" cy="58" r="46" fill="var(--accent)"/>
+      <circle cx="60" cy="58" r="46" fill="none" stroke="var(--surface)" stroke-width="1" opacity=".35"/>
+      <path d="M60 78c-13-11-26-21-26-34a14.5 14.5 0 0 1 26-9 14.5 14.5 0 0 1 26 9c0 13-13 23-26 34Z" fill="var(--surface)"/>
+    </svg>
   </div>
-  <div class="env-hint">
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s-8-4.6-8-11a5 5 0 0 1 8-4 5 5 0 0 1 8 4c0 6.4-8 11-8 11Z" fill="var(--ink-soft)"/></svg>
-    tócame
-  </div>
+  <div class="env-hint">rompe el sello</div>
 </button>
 <script>
   (function(){
